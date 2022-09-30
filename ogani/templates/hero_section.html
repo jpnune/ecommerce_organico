@@ -1,0 +1,56 @@
+{% load static %}
+
+{% if name_url == '/' %}
+    <section class="hero">
+{% else %}
+    <section class="hero hero-normal">
+{% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Categorias</span>
+                    </div>
+                    <ul>
+                        {% for item in lista %}
+                            <li><a href="#">{{ item }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <div class="hero__search__categories">
+                                Todas Categorias
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="O que você busca?">
+                            <button type="submit" class="site-btn">PESQUISAR</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>12999888777</h5>
+                            <span>suporte 24horas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banner hero -->
+                {% if name_url == '/' %}
+                {% include 'banner_hero.html' %}
+                {% endif %}
+                <!--End banner hero-->
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->

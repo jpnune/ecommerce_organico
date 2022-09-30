@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+    {% block content %}
+
+        <!-- Humberger Begin -->
+            {% include 'hamburguer_section.html' %}
+        <!-- Humberger End -->
+
+        <!-- Header Section Begin -->
+            {% include 'header_section.html' %}
+        <!-- Header Section End -->
+            
+        <!-- Hero Section Begin -->
+            {% include 'hero_section.html' %}
+        <!-- Hero Section End -->
+
+        <!-- Breadcrumb Section Begin -->
+            {% include 'blog/breadcrumb_section.html' %}
+        <!-- Breadcrumb Section End -->
+
+        <!-- Blog Section Begin -->
+            {% include 'blog/blog_section.html' %}
+        <!-- Blog Section End -->
+
+        <!-- Footer Section Begin -->
+            {% include 'footer_section.html' %}
+        <!-- Footer Section End -->
+    {% endblock %}
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+
+</body>
+
+</html>

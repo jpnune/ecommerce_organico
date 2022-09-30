@@ -1,0 +1,86 @@
+{% load static %}
+
+<!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> organi@gmail.com</li>
+                                <li>Frete GRÁTIS para compra a partir de R$99,00 </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                            <div class="header__top__right__language">
+                                <!--TODO: trocar o icone da bandeira americana por uma do Brasil 27x14 px-->
+                                <img src="{% static 'organico/img/language.png' %}" alt="">
+                                <div>Portugues</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">Portugues</a></li>
+                                    <li><a href="#">Inglês</a></li>
+                                </ul>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="#"><i class="fa fa-user"></i>Entrar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="{% url 'home' %}"><img src="{% static 'organico/img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'shop_grid' %}">Produtos</a></li>
+                            <li><a href="#">Páginas</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="{% url 'shop_details' %}">Detalhes dos produtos</a></li>
+                                    <li><a href="{% url 'shoping_cart' %}">Carrinho de compras</a></li>
+                                    <!--TODO: achar uma boa tradução para checkout-->
+                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
+                                    <!--TODO: achar uma boa tradução para blog details-->
+                                    <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li class=""><a href="{% url 'blog' %}">Artigos</a></li>
+                            <li><a href="{% url 'contact' %}">Contato</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <!--TODO: trazer a quantidade de produtos do heart e shopping cart do banco-->
+                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        </ul>
+                        <!-- TODO: trazer o valor do banco ou do carrinho de compras-->
+                        <div class="header__cart__price">Item: <span>$150.00</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->

@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ecommerce de Produtos Orgânicos</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'organico/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'organico/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'organico/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'organico/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'organico/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'organico/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'organico/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'organico/css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    {% block content %}    {% endblock %}
+    
+    
+
+    
+    <!-- Js Plugins-->
+    <script src="{% static 'organico/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'organico/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'organico/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'organico/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'organico/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'organico/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'organico/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'organico/js/main.js' %}"></script>  
+
+    
+
+
+</body>
+
+</html>
