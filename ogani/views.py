@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
 
-from .models import Categoria
+from .models import Categoria, Produto
 
 
 class HomeView(View):
@@ -9,9 +9,12 @@ class HomeView(View):
     def get(self, request):
         name_url = request.path
         lista_categoria = Categoria.objects.all()
+        lista_features = Produto.objects.all()
         context = {
             'lista': lista_categoria,
+            'lista_features': lista_features,
             'name_url': name_url,
+            
         }
         return render(request, 'index.html', context)
 
