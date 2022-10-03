@@ -1,3 +1,4 @@
+from unittest.util import _MAX_LENGTH
 import uuid
 
 from django.db import models
@@ -5,6 +6,7 @@ from stdimage.models import StdImageField
 
 
 class Base(models.Model):
+    nome = models.CharField('Nome', max_length=50, )
     criado = models.DateField('Criação', auto_now_add=True)
     modificado = models.DateField('Atualização', auto_now = True)
     ativo = models.BooleanField('Ativo?', default=True)
@@ -12,14 +14,13 @@ class Base(models.Model):
     class Meta:
         abstract = True
 
-    def get_file_path(_instance, filename):
-        ext = filename.split('.')[-1]
-        filename = f'{uuid.uuid4()}.{ext}'
-        return filename
+
+    #def get_file_path(_instance, filename):
+    #    ext = filename.split('.')[-1]
+    #    filename = f'{uuid.uuid4()}.{ext}'
+    #    return filename
 
 class Categoria(Base):
-   
-    nome_categoria = models.CharField('nome_categoria', max_length=50, null= True)
 
     class Meta:
         verbose_name = 'Categoria'
@@ -27,10 +28,9 @@ class Categoria(Base):
         abstract = False
 
     def __str__(self):
-        return self.nome_categoria
+        return self.nome
 
 class Produto(Base):
-    nome = models.CharField('Nome', max_length=50)
     quantidade = models.IntegerField('Quantidade')
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=5, default=0.00 )
@@ -45,5 +45,23 @@ class Produto(Base):
         
     def __str__(self):
         return self.nome
+        
     
+class Banner(Base):
+    imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
+
+    class Meta:
+        abstract = False
+
+    def __str__(self):
+        return self.nome
+
+class Blog(Base):
+    imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
+    nome = models.CharField('Titulo', max_length=50)
+    texto_chamada = models.CharField('texto_chamada', max_length=200)
     
+
+    class Meta:
+        abstract = False
+

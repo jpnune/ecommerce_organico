@@ -1,7 +1,8 @@
+from itertools import product
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
 
-from .models import Categoria, Produto
+from .models import Categoria, Produto, Banner, Blog
 
 
 class HomeView(View):
@@ -9,12 +10,21 @@ class HomeView(View):
     def get(self, request):
         name_url = request.path
         lista_categoria = Categoria.objects.all()
-        lista_features = Produto.objects.all()
+        lista_destaques = Produto.objects.all()
+        lista_banner = Banner.objects.all()
+        latest_product = Produto.objects.filter() #filtrar os 12 ultimos produtos vendidos e paginar de 3 em 3
+        top_rated_product = Produto.objects.filter() #filtrar os 12 produtos mais vendidos e paginar de 3 em 3
+        review_product = Produto.objects.filter() #filtrar os 12 produtos melhor desejados e paginar de 3 em 3
+        top_3_artigos = Blog.objects.all()[:3] #filtrar os 3 artigos mais recentes
         context = {
             'lista': lista_categoria,
-            'lista_features': lista_features,
+            'lista_destaques': lista_destaques,
             'name_url': name_url,
-            
+            'lista_banner': lista_banner,
+            'latest_product': latest_product, 
+            'top_rated_product': top_rated_product,
+            'review_product': review_product,
+            'top_3_artigos': top_3_artigos,
         }
         return render(request, 'index.html', context)
 
