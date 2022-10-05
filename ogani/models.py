@@ -1,5 +1,7 @@
+from email.policy import default
 from unittest.util import _MAX_LENGTH
 import uuid
+from xmlrpc.client import boolean
 
 from django.db import models
 from stdimage.models import StdImageField
@@ -13,12 +15,6 @@ class Base(models.Model):
 
     class Meta:
         abstract = True
-
-
-    #def get_file_path(_instance, filename):
-    #    ext = filename.split('.')[-1]
-    #    filename = f'{uuid.uuid4()}.{ext}'
-    #    return filename
 
 class Categoria(Base):
 
@@ -34,7 +30,10 @@ class Produto(Base):
     quantidade = models.IntegerField('Quantidade')
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=5, default=0.00 )
-    imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)  
+    imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
+    promocao = models.BooleanField('Promoção', default= False)
+    preco_promocao =  models.DecimalField('Preço', decimal_places=2, max_digits=5, null=True )
+    
     
 
     class Meta:
@@ -42,12 +41,14 @@ class Produto(Base):
         verbose_name_plural = 'Produtos'
         abstract = False
 
-        
+
     def __str__(self):
         return self.nome
-        
+ 
+    
     
 class Banner(Base):
+    
     imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
 
     class Meta:

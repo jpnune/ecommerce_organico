@@ -12,7 +12,7 @@ urlpatterns = [
     path('checkout/', CheckoutView.as_view() , name='checkout'),
     path('contact/', ContactView.as_view() , name='contact'),
     path('main/', MainView.as_view() , name='shop_details'),
-    path('shop-grid/', ShopDetailsView.as_view() , name='shop_grid'),
+    path('shop-grid/', ProdutosView.as_view() , name='shop_grid'),
     path('shoping-cart/', ShopingCartView.as_view() , name='shoping_cart'),
 ]
 

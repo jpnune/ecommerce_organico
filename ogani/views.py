@@ -1,4 +1,5 @@
 from itertools import product
+from pyexpat import native_encoding
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
 
@@ -29,6 +30,23 @@ class HomeView(View):
         return render(request, 'index.html', context)
 
 
+class ProdutosView(TemplateView):
+    
+    def get(self, request):
+        lista_categoria = lista_categoria = Categoria.objects.all()
+        lista_produtos = Produto.objects.all()
+        latests_products = Produto.objects.all()[:3]
+        promocao = Produto.objects.filter(promocao = True)
+        print(promocao)
+        context = {
+            'lista_categoria': lista_categoria,
+            'lista_produtos': lista_produtos,
+            'latests_products':latests_products,
+            'promocao':promocao,
+        }
+        return render(request, 'shop_grid.html', context)
+
+
 
 class BlogView(TemplateView):
     template_name = 'blog.html'
@@ -50,8 +68,7 @@ class MainView(TemplateView):
     template_name = 'shop_details.html'
 
 
-class ShopDetailsView(TemplateView):
-    template_name = 'shop_grid.html'
+
 
 class ShopingCartView(TemplateView):
     template_name = 'shoping_cart.html'

@@ -9,7 +9,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-   list_display = ('nome', 'quantidade', 'categoria', 'criado', 'modificado', 'ativo')
+   list_display = ('nome', 'quantidade', 'categoria','promocao', 'criado', 'modificado', 'ativo')
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
@@ -18,3 +18,5 @@ class BannerAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('nome', 'imagem', 'criado', 'modificado', 'ativo' )
+
+
