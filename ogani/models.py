@@ -32,7 +32,7 @@ class Produto(Base):
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=5, default=0.00 )
     imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
     promocao = models.BooleanField('Promoção', default= False)
-    preco_promocao =  models.DecimalField('Preço', decimal_places=2, max_digits=5, null=True )
+    preco_promocao =  models.DecimalField('Preço', decimal_places=2, max_digits=5, null=True, blank =True )
     
     
 

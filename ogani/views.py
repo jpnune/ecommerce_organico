@@ -1,5 +1,3 @@
-from itertools import product
-from pyexpat import native_encoding
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
 
@@ -18,7 +16,7 @@ class HomeView(View):
         review_product = Produto.objects.filter() #filtrar os 12 produtos melhor desejados e paginar de 3 em 3
         top_3_artigos = Blog.objects.all()[:3] #filtrar os 3 artigos mais recentes
         context = {
-            'lista': lista_categoria,
+            'lista_categoria': lista_categoria,
             'lista_destaques': lista_destaques,
             'name_url': name_url,
             'lista_banner': lista_banner,
@@ -31,26 +29,56 @@ class HomeView(View):
 
 
 class ProdutosView(TemplateView):
-    
+
     def get(self, request):
-        lista_categoria = lista_categoria = Categoria.objects.all()
+        lista_categoria = Categoria.objects.all()
         lista_produtos = Produto.objects.all()
         latests_products = Produto.objects.all()[:3]
+        ordenacao_por_preco = Prduto.objects.filter(preco = 2.90)
         promocao = Produto.objects.filter(promocao = True)
-        print(promocao)
+        name_url = request.path.title().replace('/', '')
+        lista_ordem = ['quantidade', 'categoria', 'preco', 'promocao']
+        paginas = self.paginas(len(lista_produtos))
         context = {
+            'ordenacao' : ordenacao_por_preco,
             'lista_categoria': lista_categoria,
             'lista_produtos': lista_produtos,
             'latests_products':latests_products,
             'promocao':promocao,
+            'name_url': name_url,
+            'lista_ordem': lista_ordem,
+            'paginas': range(1,paginas + 1),
+            'quantidade_produtos': len(lista_produtos),
         }
-        return render(request, 'shop_grid.html', context)
+        return render(request, 'produtos.html', context)
+
+    def paginas(self, num):
+        if num % 9 == 0:
+            return num // 9
+        else:
+            return (num // 9) + 1 
+
+    def template_produtos(self, num):
+        res = self.paginas(num)
+        final = num
+        inicio = 0
+        if num == (9 * res):
+            final = 9 * res
+
+        if num > 9:
+            inicio = final -1
+              
 
 
+class ArtigosView(TemplateView):
 
-class BlogView(TemplateView):
-    template_name = 'blog.html'
 
+    def get(self, request):
+        name_url = request.path.title().replace('/', '')
+        context = {
+            'name_url': name_url,
+        }
+        return render(request, 'artigos.html', context)
 
 class BlogDetailsView(TemplateView):
     template_name = 'blog_details.html'

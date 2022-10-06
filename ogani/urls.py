@@ -7,12 +7,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('blog/', BlogView.as_view() , name='blog'),
+    path('artigos/', ArtigosView.as_view() , name='artigos'),
     path('blog-details/', BlogDetailsView.as_view() , name='blog_details'),
     path('checkout/', CheckoutView.as_view() , name='checkout'),
     path('contact/', ContactView.as_view() , name='contact'),
     path('main/', MainView.as_view() , name='shop_details'),
-    path('shop-grid/', ProdutosView.as_view() , name='shop_grid'),
+    path('produtos/', ProdutosView.as_view() , name='produtos'),
     path('shoping-cart/', ShopingCartView.as_view() , name='shoping_cart'),
 ]
 
