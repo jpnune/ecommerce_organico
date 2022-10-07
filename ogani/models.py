@@ -1,4 +1,5 @@
 from email.policy import default
+from tkinter import Widget
 from unittest.util import _MAX_LENGTH
 import uuid
 from xmlrpc.client import boolean
@@ -8,7 +9,7 @@ from stdimage.models import StdImageField
 
 
 class Base(models.Model):
-    nome = models.CharField('Nome', max_length=50, )
+    nome = models.CharField('Nome', max_length=50, unique= True)
     criado = models.DateField('Criação', auto_now_add=True)
     modificado = models.DateField('Atualização', auto_now = True)
     ativo = models.BooleanField('Ativo?', default=True)
@@ -33,6 +34,7 @@ class Produto(Base):
     imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
     promocao = models.BooleanField('Promoção', default= False)
     preco_promocao =  models.DecimalField('Preço', decimal_places=2, max_digits=5, null=True, blank =True )
+    descrcao = models.CharField('Descrição', max_length='500', widget='text')
     
     
 

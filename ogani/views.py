@@ -34,13 +34,11 @@ class ProdutosView(TemplateView):
         lista_categoria = Categoria.objects.all()
         lista_produtos = Produto.objects.all()
         latests_products = Produto.objects.all()[:3]
-        ordenacao_por_preco = Prduto.objects.filter(preco = 2.90)
         promocao = Produto.objects.filter(promocao = True)
         name_url = request.path.title().replace('/', '')
         lista_ordem = ['quantidade', 'categoria', 'preco', 'promocao']
         paginas = self.paginas(len(lista_produtos))
         context = {
-            'ordenacao' : ordenacao_por_preco,
             'lista_categoria': lista_categoria,
             'lista_produtos': lista_produtos,
             'latests_products':latests_products,
@@ -67,7 +65,27 @@ class ProdutosView(TemplateView):
 
         if num > 9:
             inicio = final -1
-              
+
+        return inicio, final      
+
+
+class DescricaoProdutosView(TemplateView):
+
+    def get(self, request, nome):
+        name_url = request.path.title().replace('/Descricao-Produtos/' , 'Descrição Produtos')
+        lista_categoria = Categoria.objects.all()
+        busca_nome = Produto.objects.get(nome = nome)
+        print(busca_nome)
+        print(busca_nome.id)
+        
+        context = {
+            'name_url': name_url,
+            'lista_categoria': lista_categoria,
+            'busca_nome': busca_nome
+
+        }
+        return render(request, 'descricao_produtos.html', context)
+    
 
 
 class ArtigosView(TemplateView):
@@ -92,8 +110,7 @@ class ContactView(TemplateView):
     template_name = 'contact.html'
 
 
-class MainView(TemplateView):
-    template_name = 'shop_details.html'
+
 
 
 

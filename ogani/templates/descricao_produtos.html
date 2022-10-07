@@ -1,8 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
     <!-- Humberger Begin -->
-    {% include 'humburguer_section.html' %}
+    {% include 'hamburguer_section.html' %}
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
@@ -14,18 +15,18 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    {% include 'hero_section.html' %}
+    {% include 'breadcrumb_section.html' %}
     <!-- Breadcrumb Section End -->
 
     <!-- Product Details Section Begin -->
-    {% include 'product_details_section.html' %}
+    {% include 'shop_detail/product_details_section.html' %}
     <!-- Product Details Section End -->
 
     <!-- Related Product Section Begin -->
-    {% include 'related_product_section.html' %}
+    {% include 'shop_detail/related_product_section.html' %}
     <!-- Related Product Section End -->
 
     <!-- Footer Section Begin -->
-    {% include 'related_product_section.html' %}
+    {% include 'footer_section.html' %}
     <!-- Footer Section End -->
 {% endblock %}

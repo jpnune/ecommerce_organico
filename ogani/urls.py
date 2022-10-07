@@ -11,7 +11,8 @@ urlpatterns = [
     path('blog-details/', BlogDetailsView.as_view() , name='blog_details'),
     path('checkout/', CheckoutView.as_view() , name='checkout'),
     path('contact/', ContactView.as_view() , name='contact'),
-    path('main/', MainView.as_view() , name='shop_details'),
+    path('descricao-produtos/', DescricaoProdutosView.as_view() , name='descricao_produtos'),
+    path('descricao-produtos/<str:nome>', DescricaoProdutosView.as_view() , name='descricao_produto'),
     path('produtos/', ProdutosView.as_view() , name='produtos'),
     path('shoping-cart/', ShopingCartView.as_view() , name='shoping_cart'),
 ]

@@ -172,10 +172,9 @@
                                 <span>Ordenaçao</span>
                                 <select>
                                     {% for valor in lista_ordem %}
-                                    <option value="{{ valor }}">{{ valor }}</option>
+                                    <option  value="{{ valor }}">{{ valor }}</option>
                                     {% endfor %}
                                 </select>
-                                <button>filtrar</button>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -206,7 +205,7 @@
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h6><a href="#">{{ produto.nome }}</a></h6>
+                                <h6><a href="{% url 'descricao_produto' produto.nome %}">{{ produto.nome }}</a></h6>
                                 <h5>R${{ produto.preco }}</h5>
                             </div>
                         </div>
