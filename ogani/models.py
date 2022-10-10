@@ -34,7 +34,7 @@ class Produto(Base):
     imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
     promocao = models.BooleanField('Promoção', default= False)
     preco_promocao =  models.DecimalField('Preço', decimal_places=2, max_digits=5, null=True, blank =True )
-    descrcao = models.CharField('Descrição', max_length='500', widget='text')
+    descricao = models.TextField('Descrição', max_length='500', null=True)
     
     
 
@@ -67,4 +67,9 @@ class Blog(Base):
 
     class Meta:
         abstract = False
+
+class CarrinhoCompra(Base):
+    preco = models.DecimalField('Preço', decimal_places=2, max_digits=5 )
+    quantidade = models.IntegerField('Quantidade')
+
 

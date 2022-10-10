@@ -14,7 +14,7 @@ urlpatterns = [
     path('descricao-produtos/', DescricaoProdutosView.as_view() , name='descricao_produtos'),
     path('descricao-produtos/<str:nome>', DescricaoProdutosView.as_view() , name='descricao_produto'),
     path('produtos/', ProdutosView.as_view() , name='produtos'),
-    path('shoping-cart/', ShopingCartView.as_view() , name='shoping_cart'),
+    path('carrinho-de-compra/', CarrinhoCompraView.as_view() , name='carrinho_de_compra'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

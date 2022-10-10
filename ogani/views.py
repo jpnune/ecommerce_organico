@@ -1,7 +1,9 @@
+from unicodedata import name
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
 
 from .models import Categoria, Produto, Banner, Blog
+import re
 
 
 class HomeView(View):
@@ -71,17 +73,20 @@ class ProdutosView(TemplateView):
 
 class DescricaoProdutosView(TemplateView):
 
-    def get(self, request, nome):
-        name_url = request.path.title().replace('/Descricao-Produtos/' , 'Descrição Produtos')
+    def get(self, request, nome=None):
+        name_url = request.path.title().replace('/Descricao-Produtos/' , 'Descrição Produtos ')
+        name_url = re.findall('Descrição Produtos', name_url)[0]
+        lista_produtos = Produto.objects.all()
         lista_categoria = Categoria.objects.all()
-        busca_nome = Produto.objects.get(nome = nome)
-        print(busca_nome)
-        print(busca_nome.id)
-        
+        # TODO: fazer um try exception no lugar do if
+        if nome:
+            busca_nome =  Produto.objects.get(nome = nome) 
+            
         context = {
             'name_url': name_url,
             'lista_categoria': lista_categoria,
-            'busca_nome': busca_nome
+            'busca_nome': busca_nome,
+            'lista_produtos': lista_produtos[:4]
 
         }
         return render(request, 'descricao_produtos.html', context)
@@ -98,6 +103,17 @@ class ArtigosView(TemplateView):
         }
         return render(request, 'artigos.html', context)
 
+class CarrinhoCompraView(TemplateView):
+
+    def get(self, request):
+        name_url = request.path.title().replace('/', '').replace('-', ' ')
+        dados = request.POST()
+        context={
+            'name_url':name_url,
+        }
+        return render(request, 'carrinho_de_compra.html', context)
+
+
 class BlogDetailsView(TemplateView):
     template_name = 'blog_details.html'
 
@@ -111,12 +127,6 @@ class ContactView(TemplateView):
 
 
 
-
-
-
-
-class ShopingCartView(TemplateView):
-    template_name = 'shoping_cart.html'
 
 
 

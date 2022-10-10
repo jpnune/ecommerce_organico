@@ -140,11 +140,11 @@
                     <div class="row">
                         <div class="product__discount__slider owl-carousel">
 
-                            {% for item in promocao %}
+                            {% for produto in promocao %}
                             <div class="col-lg-4">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                        data-setbg="{{ item.imagem.url }}">
+                                        data-setbg="{{ produto.imagem.url }}">
                                         <!--TODO: fazer uma logica para colocar a porcentagem-->
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
@@ -154,9 +154,10 @@
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <span>{{ item.nome }}</span>
-                                        <h5><a href="#">{{ item.categoria }}</a></h5>
-                                        <div class="product__item__price">R${{ item.preco_promocao}} <span>${{ item.preco}}</span></div>
+                                        <span>{{ produto.categoria }}</span>
+                                        
+                                        <h5><a href="{% url 'descricao_produto' produto.nome %}">{{ produto.nome }}</a></h5>
+                                        <div class="product__item__price">R${{ produto.preco_promocao}} <span>${{ produto.preco}}</span></div>
                                     </div>
                                 </div>
                             </div>

@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -19,11 +20,11 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Shoping Cart Section Begin -->
-    {% include 'shoping_cart_section.html' %}
+    {% include 'shop_cart/shoping_cart_section.html' %}
     <!-- Shoping Cart Section End -->
 
     <!-- Footer Section Begin -->
-    {% include '.htmlfooter_section' %}
+    {% include 'footer_section.html' %}
     <!-- Footer Section End -->
 
 {% endblock %}
