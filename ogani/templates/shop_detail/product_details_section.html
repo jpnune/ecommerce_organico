@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <!--TODO: criar um banco de dados para essas fotos no banco de dados de produtos-->
-            <form action="">
+            
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
@@ -29,17 +29,20 @@
                     <div class="product__details__text">
                         <h3>{{ busca_nome.nome }}</h3>
                         <div class="product__details__rating">
+                            <!--
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                            <span>(18 reviews)</span> -->
                         </div>
                         <div class="product__details__price">R$ {{ busca_nome.preco }}</div>
+                        
+                        <!--
                         <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
                             vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                            quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+                            quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p> -->
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
@@ -47,7 +50,11 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn primary-btn">ADICIONAR AO CARRINHo</button>
+                    <form action="." method="POST">
+                    {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="ADICIONAR AO CARRINHO" class="btn primary-btn">
+                    </form>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li><b>Disponibilidade: </b> <span>Em Estoque</span></li>
@@ -64,7 +71,7 @@
                         </ul>
                     </div>
                 </div>
-            </form>
+            
             <div class="col-lg-12">
                 <div class="product__details__tab">
                     <ul class="nav nav-tabs" role="tablist">

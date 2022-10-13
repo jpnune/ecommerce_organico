@@ -63,10 +63,15 @@ class Blog(Base):
     imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
     nome = models.CharField('Titulo', max_length=50)
     texto_chamada = models.CharField('texto_chamada', max_length=200)
+    categoria = models.CharField('Categoria', max_length=100, null=True)
     
 
     class Meta:
         abstract = False
+
+    def __str__(self):
+        return self.nome
+
 
 class CarrinhoCompra(Base):
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=5 )

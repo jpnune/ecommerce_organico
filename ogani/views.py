@@ -1,8 +1,10 @@
 from unicodedata import name
+import django
 from django.shortcuts import render
 from django.views.generic import TemplateView, View
-
-from .models import Categoria, Produto, Banner, Blog
+from django.urls import reverse_lazy
+from .form import CarrinhoCompra2
+from .models import Categoria, Produto, Banner, Blog, CarrinhoCompra
 import re
 
 
@@ -81,45 +83,81 @@ class DescricaoProdutosView(TemplateView):
         # TODO: fazer um try exception no lugar do if
         if nome:
             busca_nome =  Produto.objects.get(nome = nome) 
+        if request.method == 'POST':
+            dados = request.POST()
+            form = CarrinhoCompra2(request.POST)
             
-        context = {
-            'name_url': name_url,
-            'lista_categoria': lista_categoria,
-            'busca_nome': busca_nome,
-            'lista_produtos': lista_produtos[:4]
+            print(dados)
+            form = CarrinhoCompra2() 
+            context = {
+                'name_url': name_url,
+                'lista_categoria': lista_categoria,
+                'busca_nome': busca_nome,
+                'lista_produtos': lista_produtos[:4],
+                'form' : form,
+            }
+            return render(request, 'produtos.html', context)   
+        elif request.method == 'GET':
+            form = CarrinhoCompra2() 
+            
+            context = {
+                'name_url': name_url,
+                'lista_categoria': lista_categoria,
+                'busca_nome': busca_nome,
+                'lista_produtos': lista_produtos[:4],
+                'form' : form,
 
-        }
-        return render(request, 'descricao_produtos.html', context)
+            }
+            return render(request, 'descricao_produtos.html', context)
     
-
-
-class ArtigosView(TemplateView):
-
-
-    def get(self, request):
-        name_url = request.path.title().replace('/', '')
-        context = {
-            'name_url': name_url,
-        }
-        return render(request, 'artigos.html', context)
 
 class CarrinhoCompraView(TemplateView):
 
     def get(self, request):
         name_url = request.path.title().replace('/', '').replace('-', ' ')
+
         dados = request.POST()
+        
         context={
             'name_url':name_url,
         }
         return render(request, 'carrinho_de_compra.html', context)
 
 
+class ArtigosView(TemplateView):
+
+    def get(self, request, nome=None):
+        name_url = request.path.title().replace('/', '')
+        dict_lista = self.filtro_categoria()
+        context = {
+            'name_url': name_url,
+            'quantidade_todos_artigos': len(artigos), #TODO: fazer o count ao inves do len 
+            'dict_lista': dict_lista
+        }
+        return render(request, 'artigos.html', context)
+
+    def filtro_categoria(self):
+        categorias = list({cat.categoria for cat in Blog.objects.all()})
+        categorias.sort()
+        dict_lista = {'Todos': len(Blog.objects.all())}
+        for item in categorias:
+            dict_lista[item] = len(Blog.objects.filter(categoria = item)) 
+        return dict_lista
+
 class BlogDetailsView(TemplateView):
     template_name = 'blog_details.html'
 
 
-class CheckoutView(TemplateView):
-    template_name = 'checkout.html'
+class DetalhesCompraView(TemplateView):
+
+    def get(self, request):
+        name_url = request.path.title().replace('/', '').replace('-', '')
+        context = {
+            'name_url': name_url,
+        }
+
+        return render(request, 'detalhes_compra.html', context)
+    
 
 
 class ContactView(TemplateView):
@@ -127,49 +165,16 @@ class ContactView(TemplateView):
 
 
 
+class Formulario(TemplateView):
+    
+    def get(self, request):
+        form = CarrinhoCompra2(request.POST)
+        print(form)
+        context = {
 
+        }
+        return render(self, 'carrinho_de_compra.html', context )
 
-
-
-
-def home(request):
-    #colocar lista no banco de dados
-    lista_menu_suspenso = [ 'Fresh Meat', 'Vegetables', 'Fruit & Nut Gifts', 'Fresh Berries',
-                            'Ocean Foods', 'Butter & Eggs', 'Fastfood', 'Fresh Onion',
-                            'Papayaya & Crisps', 'Oatmeal', 'Fresh Bananas',
-                        ]
-    context = {
-        'lista': lista_menu_suspenso
-    }
-    return render(request, 'index.html', context)
-
-
-'''
-
-def blog_details(request):
-    return render(request, 'blog_details.html')
-
-#def blog(request):
-#    return render(request, 'blog.html')
-
-def checkout(request):
-    return render(request, 'checkout.html')
-
-def contact(request):
-    return render(request, 'contact.html')
-
-def main(request):
-    return render(request, 'main.html')
-
-def shop_details(request):
-    return render(request, 'shop-details.html')
-
-def shop_grid(request):
-    return render(request, 'shop-grid.html')
-
-def shoping_cart(request):
-    return render(request, 'shoping-cart.html')
-
-'''
+    
     
 

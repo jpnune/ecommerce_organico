@@ -19,7 +19,7 @@ class BannerAdmin(admin.ModelAdmin):
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'imagem', 'criado', 'modificado', 'ativo' )
+    list_display = ('nome', 'categoria', 'criado', 'modificado', 'ativo' )
 
 
 @admin.register(CarrinhoCompra)

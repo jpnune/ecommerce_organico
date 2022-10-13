@@ -53,10 +53,11 @@
                             <li><a href="{% url 'produtos' %}">Produtos</a></li>
                             <li><a href="#">Páginas</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="#">Detalhes dos produtos</a></li>
+                                    <!--TODO: aparentemente é melhor deixar sem  
+                                        <li><a href="#">Detalhes dos produtos</a></li> -->
                                     <li><a href="{% url 'carrinho_de_compra' %}">Carrinho de compras</a></li>
                                     <!--TODO: achar uma boa tradução para checkout-->
-                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
+                                    <li><a href="{% url 'detalhes_compra' %}">Detalhes da compra</a></li>
                                     <!--TODO: achar uma boa tradução para blog details-->
                                     <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
                                 </ul>
@@ -71,7 +72,7 @@
                         <ul>
                             <!--TODO: trazer a quantidade de produtos do heart e shopping cart do banco-->
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{% url 'carrinho_de_compra' %} "><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                         <!-- TODO: trazer o valor do banco ou do carrinho de compras-->
                         <div class="header__cart__price">Item: <span>$150.00</span></div>
