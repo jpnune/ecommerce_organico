@@ -64,6 +64,7 @@ class Blog(Base):
     nome = models.CharField('Titulo', max_length=50)
     texto_chamada = models.CharField('texto_chamada', max_length=200)
     categoria = models.CharField('Categoria', max_length=100, null=True)
+    corpo = models.TextField(null=True, blank=True)
     
 
     class Meta:

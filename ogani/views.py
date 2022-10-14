@@ -127,12 +127,12 @@ class CarrinhoCompraView(TemplateView):
 class ArtigosView(TemplateView):
 
     def get(self, request, nome=None):
-        name_url = request.path.title().replace('/', '')
-        dict_lista = self.filtro_categoria()
         context = {
-            'name_url': name_url,
-            'quantidade_todos_artigos': len(artigos), #TODO: fazer o count ao inves do len 
-            'dict_lista': dict_lista
+            'name_url': request.path.title().replace('/', ''),
+            'dict_lista': self.filtro_categoria(),
+            'artigos_recentes': self.ultimos_artigos(5),
+            'paginas': self.paginas(),
+            'artigos' : Blog.objects.all(),
         }
         return render(request, 'artigos.html', context)
 
@@ -143,6 +143,21 @@ class ArtigosView(TemplateView):
         for item in categorias:
             dict_lista[item] = len(Blog.objects.filter(categoria = item)) 
         return dict_lista
+    
+    def ultimos_artigos(self, quantidade=int):
+        ultimos_artigos = Blog.objects.order_by('-criado')[:quantidade]
+        return ultimos_artigos
+    
+    def paginas(self):
+        tamanho = Blog.objects.count()
+        if tamanho % 6 == 0:
+            pagina = tamanho // 6
+        elif (tamanho > 6) and (tamanho % 6 != 0):
+            pagina = (tamanho // 6) + 1
+        
+        return pagina
+
+    
 
 class BlogDetailsView(TemplateView):
     template_name = 'blog_details.html'
