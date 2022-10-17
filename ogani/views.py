@@ -53,6 +53,26 @@ class ProdutosView(TemplateView):
             'quantidade_produtos': len(lista_produtos),
         }
         return render(request, 'produtos.html', context)
+    
+    def post(self, request):
+        lista_categoria = Categoria.objects.all()
+        lista_produtos = Produto.objects.all()
+        latests_products = Produto.objects.all()[:3]
+        promocao = Produto.objects.filter(promocao = True)
+        name_url = request.path.title().replace('/', '')
+        lista_ordem = ['quantidade', 'categoria', 'preco', 'promocao']
+        paginas = self.paginas(len(lista_produtos))
+        context = {
+            'lista_categoria': lista_categoria,
+            'lista_produtos': lista_produtos,
+            'latests_products':latests_products,
+            'promocao':promocao,
+            'name_url': name_url,
+            'lista_ordem': lista_ordem,
+            'paginas': range(1,paginas + 1),
+            'quantidade_produtos': len(lista_produtos),
+        }
+        return render(request, 'produtos.html', context)
 
     def paginas(self, num):
         if num % 9 == 0:
@@ -83,23 +103,9 @@ class DescricaoProdutosView(TemplateView):
         # TODO: fazer um try exception no lugar do if
         if nome:
             busca_nome =  Produto.objects.get(nome = nome) 
-        if request.method == 'POST':
-            dados = request.POST()
-            form = CarrinhoCompra2(request.POST)
-            
-            print(dados)
+        if request.method == 'GET':
+            print('get =========', request.GET)
             form = CarrinhoCompra2() 
-            context = {
-                'name_url': name_url,
-                'lista_categoria': lista_categoria,
-                'busca_nome': busca_nome,
-                'lista_produtos': lista_produtos[:4],
-                'form' : form,
-            }
-            return render(request, 'produtos.html', context)   
-        elif request.method == 'GET':
-            form = CarrinhoCompra2() 
-            
             context = {
                 'name_url': name_url,
                 'lista_categoria': lista_categoria,
@@ -110,6 +116,21 @@ class DescricaoProdutosView(TemplateView):
             }
             return render(request, 'descricao_produtos.html', context)
     
+    def post(self, request, nome=None):
+        dados = request.POST
+        print('post =======',dados)
+        if nome:
+            busca_nome =  Produto.objects.get(nome = nome) 
+        name_url = request.path.title().replace('/Descricao-Produtos/' , 'Descrição Produtos ')
+        name_url = re.findall('Descrição Produtos', name_url)[0]
+        context = {
+            'name_url': name_url,
+            'lista_categoria': lista_categoria,
+            'busca_nome': busca_nome,
+            'lista_produtos': lista_produtos[:4],
+        }
+        return render(request, 'descricao_produtos.html', context)
+
 
 class CarrinhoCompraView(TemplateView):
 
@@ -126,15 +147,18 @@ class CarrinhoCompraView(TemplateView):
 
 class ArtigosView(TemplateView):
 
-    def get(self, request, nome=None):
+    def get(self, request, pagina):
+        indice_pagina = int(request.path.split('/')[2])
+        
+
         context = {
             'name_url': request.path.title().replace('/', ''),
             'dict_lista': self.filtro_categoria(),
             'artigos_recentes': self.ultimos_artigos(5),
-            'paginas': self.paginas(),
-            'artigos' : Blog.objects.all(),
+            'paginas': range(1, self.paginas() + 1),
+            'artigos' : self.mostra_artigos(indice_pagina),
         }
-        return render(request, 'artigos.html', context)
+        return render(request, 'artigos.html/', context)
 
     def filtro_categoria(self):
         categorias = list({cat.categoria for cat in Blog.objects.all()})
@@ -153,9 +177,12 @@ class ArtigosView(TemplateView):
         if tamanho % 6 == 0:
             pagina = tamanho // 6
         elif (tamanho > 6) and (tamanho % 6 != 0):
-            pagina = (tamanho // 6) + 1
-        
+            pagina = (tamanho // 6) + 1    
         return pagina
+
+    def mostra_artigos(self,indice_pagina):
+            inicio = (indice_pagina * 6) - 6
+            return Blog.objects.all()[inicio: inicio + 6]
 
     
 

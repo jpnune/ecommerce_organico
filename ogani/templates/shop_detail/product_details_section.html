@@ -26,7 +26,8 @@
                 </div>
                 
                 <div class="col-lg-6 col-md-6">
-                    <div class="product__details__text">
+                    
+                    <div class="product__details__text" value="{{ busca_nome.nome }} " id="produto_nome">
                         <h3>{{ busca_nome.nome }}</h3>
                         <div class="product__details__rating">
                             <!--
@@ -37,22 +38,27 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span> -->
                         </div>
-                        <div class="product__details__price">R$ {{ busca_nome.preco }}</div>
+                        
+                        <div class="product__details__price" value="{{ busca_nome.preco }}">R$ {{ busca_nome.preco }}</div>
                         
                         <!--
                         <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
                             vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
                             quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p> -->
+                        
+                        <form action="" method="POST">
+                        {% csrf_token %}
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
+                                    
                                     <input type="text" value="1">
                                 </div>
                             </div>
                         </div>
-                    <form action="." method="POST">
-                    {% csrf_token %}
-                        {{ form.as_p }}
+                    
+                    
+                    
                         <input type="submit" value="ADICIONAR AO CARRINHO" class="btn primary-btn">
                     </form>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
