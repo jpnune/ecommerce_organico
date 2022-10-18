@@ -1,6 +1,6 @@
 from unicodedata import name
 import django
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View
 from django.urls import reverse_lazy
 from .form import CarrinhoCompra2
@@ -118,18 +118,21 @@ class DescricaoProdutosView(TemplateView):
     
     def post(self, request, nome=None):
         dados = request.POST
-        print('post =======',dados)
-        if nome:
-            busca_nome =  Produto.objects.get(nome = nome) 
-        name_url = request.path.title().replace('/Descricao-Produtos/' , 'Descrição Produtos ')
-        name_url = re.findall('Descrição Produtos', name_url)[0]
-        context = {
-            'name_url': name_url,
-            'lista_categoria': lista_categoria,
-            'busca_nome': busca_nome,
-            'lista_produtos': lista_produtos[:4],
-        }
-        return render(request, 'descricao_produtos.html', context)
+        #nome = request.POST.get('nome_produto')
+        #preco = float(request.POST.get('preco_produto').replace(',', '.'))
+        #quantidade = int(request.POST.get('quantidade_produtos'))
+        #total = preco * quantidade
+        #print('nome  === ',nome)
+        #print('preco  === ',preco)
+        #print('qtdd  === ',quantidade)
+        #print('carrinho == ', request.POST.get('carrinho'))
+        print('dados === ',dados)
+
+        #TODO: fazer uma verificacao se ja existe o produto e apenas somar 
+        #CarrinhoCompra.objects.create(nome=nome, preco=preco, quantidade=quantidade, total=total)
+
+
+        return redirect('produtos')
 
 
 class CarrinhoCompraView(TemplateView):
@@ -137,10 +140,11 @@ class CarrinhoCompraView(TemplateView):
     def get(self, request):
         name_url = request.path.title().replace('/', '').replace('-', ' ')
 
-        dados = request.POST()
+        dados = CarrinhoCompra.objects.all()
         
         context={
             'name_url':name_url,
+            'carrinho_compra':dados,
         }
         return render(request, 'carrinho_de_compra.html', context)
 

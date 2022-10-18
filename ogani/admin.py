@@ -24,7 +24,7 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(CarrinhoCompra)
 class CarrinhoComprasAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'preco', 'quantidade', 'criado', 'modificado', 'ativo')
+    list_display = ('nome', 'preco', 'quantidade', 'total', 'criado', 'modificado', 'ativo')
 
 
 

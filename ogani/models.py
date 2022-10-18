@@ -75,7 +75,9 @@ class Blog(Base):
 
 
 class CarrinhoCompra(Base):
+    nome = models.CharField('Nome', max_length=50)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=5 )
     quantidade = models.IntegerField('Quantidade')
+    total = models.DecimalField('Preço', decimal_places=2, max_digits=5, null=True)
 
 
