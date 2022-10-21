@@ -51,19 +51,19 @@
                         <ul>
                             <li><a href="{% url 'home' %}">Home</a></li>
                             <li><a href="{% url 'produtos' %}">Produtos</a></li>
-                            <li><a href="">Páginas</a>
+                            <li><a>Páginas</a>
                                 <ul class="header__menu__dropdown">
                                     <!--TODO: aparentemente é melhor deixar sem  
                                         <li><a href="#">Detalhes dos produtos</a></li> -->
                                     <li><a href="{% url 'carrinho_de_compra' %}">Carrinho de compras</a></li>
                                     <!--TODO: achar uma boa tradução para checkout-->
                                     <li><a href="{% url 'detalhes_compra' %}">Detalhes da compra</a></li>
-                                    <!--TODO: achar uma boa tradução para blog details-->
-                                    <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
+                                    <!--TODO: achar uma boa tradução para blog details
+                                    <li><a href="">Blog Details</a></li> -->
                                 </ul>
                             </li>
                             <li class=""><a href="{% url 'artigos' 1 %}">Artigos</a></li>
-                            <li><a href="{% url 'contact' %}">Contato</a></li>
+                            <li><a href="{% url 'contato' %}">Contato</a></li>
                         </ul>
                     </nav>
                 </div>

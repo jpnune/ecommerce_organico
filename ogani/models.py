@@ -1,7 +1,6 @@
 from email.policy import default
 from tkinter import Widget
 from unittest.util import _MAX_LENGTH
-import uuid
 from xmlrpc.client import boolean
 
 from django.db import models
@@ -16,6 +15,8 @@ class Base(models.Model):
 
     class Meta:
         abstract = True
+
+
 
 class Categoria(Base):
 
@@ -59,7 +60,7 @@ class Banner(Base):
     def __str__(self):
         return self.nome
 
-class Blog(Base):
+class Artigo(Base):
     imagem = models.ImageField('Imagem', upload_to='produtos/', null=True)
     nome = models.CharField('Titulo', max_length=50)
     texto_chamada = models.CharField('texto_chamada', max_length=200)
@@ -78,6 +79,6 @@ class CarrinhoCompra(Base):
     nome = models.CharField('Nome', max_length=50)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=5 )
     quantidade = models.IntegerField('Quantidade')
-    total = models.DecimalField('Preço', decimal_places=2, max_digits=5, null=True)
+    total = models.DecimalField('Total', decimal_places=2, max_digits=5, null=True)
 
 

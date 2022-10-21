@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
     <!-- Humberger Begin -->
     {% include 'hamburguer_section.html' %}
     <!-- Humberger End -->
@@ -14,17 +15,21 @@
     {% include 'hero_section.html' %}
     <!-- Hero Section End -->
 
-    <!-- Blog Details Hero Begin -->
-    {% include 'blog_detail/blog_details_hero.html' %}
-    <!-- Blog Details Hero End -->
+    <!-- Breadcrumb Section Begin -->
+    {% include 'breadcrumb_section.html' %}
+    <!-- Breadcrumb Section End -->
 
-    <!-- Blog Details Section Begin -->
-    {% include 'blog_detail/blog_details_section.html' %}
-    <!-- Blog Details Section End -->
+    <!-- Contact Section Begin -->
+    {% include 'contato/contact_section.html' %}
+    <!-- Contact Section End -->
 
-    <!-- Related Blog Section Begin -->
-    {% include 'blog_detail/related_blog_section.html' %}
-    <!-- Related Blog Section End -->
+    <!-- Map Begin -->
+    {% include 'contato/map_section.html' %}
+    <!-- Map End -->
+
+    <!-- Contact Form Begin -->
+    {% include 'contato/contact_form.html' %}
+    <!-- Contact Form End -->
 
     <!-- Footer Section Begin -->
     {% include 'footer_section.html' %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Humberger Begin -->
+    {% include 'hamburguer_section.html' %}
+    <!-- Humberger End -->
+
+    <!-- Header Section Begin -->
+    {% include 'header_section.html' %}
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    {% include 'hero_section.html' %}
+    <!-- Hero Section End -->
+
+    <!-- Blog Details Hero Begin -->
+    {% include 'blog/blog_details_hero.html' %}
+    <!-- Blog Details Hero End -->
+
+    <!-- Blog Details Section Begin -->
+    {% include 'blog/blog_details_section.html' %}
+    <!-- Blog Details Section End -->
+
+    <!-- Related Blog Section Begin -->
+    {% include 'blog/related_blog_section.html' %}
+    <!-- Related Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    {% include 'footer_section.html' %}
+    <!-- Footer Section End -->
+{% endblock %}

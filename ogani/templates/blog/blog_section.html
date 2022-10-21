@@ -2,56 +2,12 @@
 
 <!-- Blog Section Begin -->
 <section class="blog spad">
+
+
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-5">
-                <div class="blog__sidebar">
-                    <div class="blog__sidebar__search">
-                        <form action="#">
-                            <input type="text" placeholder="Pesquisar...">
-                            <button type="submit"><span class="icon_search"></span></button>
-                        </form>
-                    </div>
-                    <div class="blog__sidebar__item">
-                        <h4>Categorias</h4>
-                        <ul>
-                            {% for categoria, quantidade in dict_lista.items %}
-                                <li><a href="#">{{ categoria }} ({{ quantidade }}) </a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="blog__sidebar__item">
-                        <!--TODO: transformar em mais vistos-->
-                        <h4>Artigos Recentes</h4>
-                        
-                        <div class="blog__sidebar__recent">
-                            {% for artigo in artigos_recentes %}
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <!--TODO: fazer um tratamento de imagem para trazer a imagem no tamanho correto -->
-                                    <img src="{% static 'organico/img/blog/sidebar/sr-1.jpg' %}" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <h6>{{ artigo.nome }}</h6>
-                                    <span>{{ artigo.criado }}</span>
-                                </div>
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <!-- TODO: verificar a necessidade dessa parte
-                    <div class="blog__sidebar__item">
-                        <h4>Search By</h4>
-                        <div class="blog__sidebar__item__tags">
-                            <a href="#">Apple</a>
-                            <a href="#">Beauty</a>
-                            <a href="#">Vegetables</a>
-                            <a href="#">Fruit</a>
-                            <a href="#">Healthy Food</a>
-                            <a href="#">Lifestyle</a>
-                        </div>
-                    </div> -->
-                </div>
+                {% include 'blog/categoria.html' %}
             </div>
             <div class="col-lg-8 col-md-7">
                 <div class="row">
@@ -67,9 +23,9 @@
                                     <li><i class="fa fa-calendar-o"></i> {{ artigo.criado }}</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="#">{{ artigo.nome }}</a></h5>
+                                <h5><a href="{% url 'artigo_details' artigo.nome %}">{{ artigo.nome }}</a></h5>
                                 <p>{{ artigo.texto_chamada }}</p>
-                                <a href="#" class="blog__btn">Leia mais... <span class="arrow_right"></span></a>
+                                <a href="{% url 'artigo_details' artigo.nome %}" class="blog__btn">Leia mais...<span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
